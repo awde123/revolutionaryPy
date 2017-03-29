@@ -2,8 +2,11 @@
 ## CreatePT for Computer Science Principles
 
 import bpy, bmesh, os, math
+from mathutils import Vector, kdtree
 
 os.chdir("/Users/s97507/plot/revolutionaryPy/")
+
+bpy.data.objects['Function'].location = (0, 0, 0)
 
 def absMax(list): ## determines the number with the most distance from zero
     return max([max(map(float, list)), abs(min(map(float, list)))])
@@ -26,30 +29,30 @@ def plot(x, y): ## plots vertices according to x and y arrays
 
 def listIn(directory): ## turns file into array
     i = open(directory, "r")
-    return i.read().replace("[","").replace("]","").split(",")
+    return i.read().split(",")
 
 def selectVert(): ## selects all vertices
-    mesh=bmesh.from_edit_mesh(bpy.context.object.data)
     for v in mesh.verts:
         v.select = True
+        
+size = len(bm.verts)
+kd = kdtree.KDTree(size)
+
+obj = bpy.context.edit_object
+me = obj.data
+bm = bmesh.from_edit_mesh(me)
 
 plot(listIn('x'),listIn('f'))
-selectVert()
-bpy.ops.mesh.edge_face_add()
+
 plot(listIn('x'),listIn('g'))
-selectVert()
-bpy.ops.mesh.edge_face_add()
 
 y = listIn('f') + listIn('g')
 
 x = listIn('x')
 
-## creates single face from all verticies
-
 ## exports and sets origin
 bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 bpy.ops.object.origin_set(type='ORIGIN_CENTER_OF_MASS')
-bpy.data.objects['Function'].location = (0, 0, 0)
 
 ## sets camera y value
 bpy.data.objects['Camera'].location.y = max([absMax(y), absMax(x)]) / math.sin(0.5)

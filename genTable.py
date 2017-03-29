@@ -30,28 +30,23 @@ int1 = rt(guess=min, trials=20)
 int2 = rt(guess=max, trials=20)
 
 while x <= max:
-    if (x >= int1) && (x <= int2):
-        x += delx
+##    if x <= int1 or x >= int2:
     fVal += [f(x)]
     gVal += [g(x)]
     xVal += [x]
     x += delx
 
-x = int1
-while x < int2:
-    fiVal += [f(x)]
-    giVal += [g(x)]
-    xiVal += [x]
-    x += delx
+##x = int1
+##while x < int2:
+##    fiVal += [f(x)]
+##    giVal += [g(x)]
+##    xiVal += [x]
+##    x += delx
 
 fVal += [f(int1), f(int2)]
 gVal += [g(int1), g(int2)]
 xVal += [int1, int2]
 
-fFile = open('f','w')
-gFile = open('g','w')
-xFile = open('x','w') ## illuminati confirmed
-
-fFile.write(str(fVal))
-gFile.write(str(gVal))
-xFile.write(str(xVal))
+open('f','w').write(str(fVal).replace("[","").replace("]",""))
+open('g','w').write(str(gVal).replace("[","").replace("]",""))
+open('x','w').write(str(xVal).replace("[","").replace("]",""))
