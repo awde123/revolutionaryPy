@@ -4,6 +4,9 @@ from math import sin, cos, tan, exp, sqrt
 fVal = []
 gVal = []
 xVal = []
+fiVal = []
+giVal = []
+xiVal = []
 
 f = eval("lambda x: {0}".format(input("f(x): ")))
 g = eval("lambda x: {0}".format(input("g(x): ")))
@@ -11,12 +14,6 @@ x = min = float(input("x min: "))
 max = float(input("x max: "))
 delx = float(input("delta x: "))
 delta = .000001
-
-while x <= max:
-    fVal += [f(x)]
-    gVal += [g(x)]
-    xVal += [x]
-    x += delx
 
 def cfunc(x):
     return (f(x) - g(x))
@@ -31,6 +28,21 @@ def rt(guess=2, trials=12, func=cfunc, deriv=cderiv):
 
 int1 = rt(guess=min, trials=20)
 int2 = rt(guess=max, trials=20)
+
+while x <= max:
+    if (x >= int1) && (x <= int2):
+        x += delx
+    fVal += [f(x)]
+    gVal += [g(x)]
+    xVal += [x]
+    x += delx
+
+x = int1
+while x < int2:
+    fiVal += [f(x)]
+    giVal += [g(x)]
+    xiVal += [x]
+    x += delx
 
 fVal += [f(int1), f(int2)]
 gVal += [g(int1), g(int2)]

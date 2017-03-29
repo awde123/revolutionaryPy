@@ -49,9 +49,7 @@ x = listIn('x')
 ## exports and sets origin
 bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 bpy.ops.object.origin_set(type='ORIGIN_CENTER_OF_MASS')
-bpy.data.objects['Function'].location.x = 0
-bpy.data.objects['Function'].location.y = 0
-bpy.data.objects['Function'].location.z = 0
+bpy.data.objects['Function'].location = (0, 0, 0)
 
 ## sets camera y value
 bpy.data.objects['Camera'].location.y = max([absMax(y), absMax(x)]) / math.sin(0.5)
