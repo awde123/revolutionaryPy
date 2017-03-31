@@ -43,14 +43,14 @@ def plotFunction(name, x, y):
         bm.to_mesh(bpy.context.object.data)
         
     bpy.ops.object.mode_set(mode='EDIT', toggle=False)
-    i = 0
-    for v in bmesh.from_edit_mesh(bpy.context.object.data).verts:
-        v.select = True
-        if i % 2 == 1:
-            bpy.ops.mesh.edge_face_add()
-            bpy.ops.mesh.select_all(action = 'DESELECT')
-            v.select = True
-        i += 1
+    bmf = bmesh.from_edit_mesh(bpy.context.object.data).verts
+    for j in range(0,len(bmf) - 2):
+        bmf.ensure_lookup_table()
+        bmf[j].select = True
+        bmf[j + 1].select = True
+        bpy.ops.mesh.edge_face_add()
+        bpy.ops.mesh.select_all(action = 'DESELECT')
+
     bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 
 plotFunction("f(x)", "x", "f")
