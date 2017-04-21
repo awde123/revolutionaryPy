@@ -55,6 +55,7 @@ def plotFunction(name, x, y):
 
 plotFunction("f(x)", "x", "f")
 plotFunction("g(x)", "x", "g")
+plotFunction("intersect", "xi", "i")
 
 y = listIn('f') + listIn('g')
 x = listIn('x')
