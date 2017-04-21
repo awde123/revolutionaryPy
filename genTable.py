@@ -4,7 +4,11 @@ from math import sin, cos, tan, exp, sqrt
 pi = 3.14159265359
 e = 2.71828182846
 
-fVal = gVal = xVal = iVal = xiVal = []
+fVal = []
+gVal = []
+xVal = []
+iVal = []
+xiVal = []
 
 f = eval("lambda x: {0}".format(input("f(x): ")))
 g = eval("lambda x: {0}".format(input("g(x): ")))
