@@ -62,6 +62,15 @@ fVal += [f(int1), f(int2)]
 gVal += [g(int1), g(int2)]
 xVal += [int1, int2]
 
+## calculates volume of intersect solid
+v = 0.0
+for i in range(0, int(len(iVal) / 2 - 1)):
+    t = (abs(iVal[i] - iVal[i + 1]) + abs(iVal[i + 2] - iVal[i + 3])) / 2 * (xiVal[i + 1] - xiVal[i]) ## generates trapezoid
+    v += pi * (t ** 2)
+    print(v)
+
+print("%s, %s" % (int1, int2))
+print(v)
 
 ## exports data
 open('f.coord','w').write(str(fVal).replace("[","").replace("]",""))
