@@ -1,3 +1,6 @@
+## Created by Gregory Croisdale March 2017
+## CreatePT for Computer Science Principles
+
 ## library importation and constant defintion for user use
 from math import sin, cos, tan, exp, sqrt
 pi = 3.14159265359

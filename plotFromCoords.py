@@ -76,3 +76,5 @@ bpy.ops.object.origin_set(type='ORIGIN_CENTER_OF_MASS')
 ## creates and adjusts camera
 cY = max([absMax(y), absMax(x)]) / math.sin(1/3), 0.0)
 bpy.ops.object.camera_add(view_align=False, enter_editmode=False, location=(0.0, cY, 0.0), rotation=(270.0*0.01745329251,180.0*0.01745329251,0.0))
+
+## preps scene for rendering
