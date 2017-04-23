@@ -13,13 +13,20 @@ xVal = []
 iVal = []
 xiVal = []
 
+def ui(text):
+    try:
+        return float(input(text))
+    except ValueError as e:
+        print("Try again")
+        return ui(text)
+
 ## user inputs python code to be used as function
 f = eval("lambda x: {0}".format(input("f(x): ")))
 g = eval("lambda x: {0}".format(input("g(x): ")))
 ## user defines bounds and delta
-x = min = float(input("x min: "))
-max = float(input("x max: "))
-delx = float(input("delta x: "))
+x = min = ui("x min: ")
+max = ui("x max: ")
+delx = ui("delta x: ")
 ## delta for derivative calculation
 delta = .000001
 
