@@ -17,8 +17,8 @@ xiVal = []
 f = eval("lambda x: {0}".format(input("f(x): ")))
 g = eval("lambda x: {0}".format(input("g(x): ")))
 ## user defines bounds and delta
-x = min = float(input("x min: "))
-max = float(input("x max: "))
+x = xmin = float(input("x min: "))
+xmax = float(input("x max: "))
 delx = float(input("delta x: "))
 ## delta for derivative calculation
 delta = .000001
@@ -37,11 +37,11 @@ def rt(guess=2, trials=12, func=cfunc, deriv=cderiv):
     return guess
 
 ## defines two intersects
-int1 = rt(guess=min, trials=20)
-int2 = rt(guess=max, trials=20)
+int1 = rt(guess=xmin, trials=20)
+int2 = rt(guess=xmax, trials=20)
 
 ## finds y values when functions are not intersecting yet
-while x <= max:
+while x <= xmax:
    if x <= int1 or x >= int2:
        fVal += [f(x)]
        gVal += [g(x)]
@@ -63,15 +63,17 @@ gVal += [g(int1), g(int2)]
 xVal += [int1, int2]
 
 ## calculates volume of intersect solid
-v = 0.0
+t = 0
+v = 0
 i = 0
 while i <= len(iVal) / 2 - 1:
-    t = (abs(iVal[i] - iVal[i + 1]) + abs(iVal[i + 2] - iVal[i + 3])) / 2 * (xiVal[i + 2] - xiVal[i]) ## generates trapezoid
-    v += pi * (t ** 2)
-    i += 2
+    t += (abs(iVal[i] - iVal[i + 1]) + abs(iVal[i + 2] - iVal[i + 3])) / 2 * (xiVal[i + 2] - xiVal[i]) ## generates trapezoid
+    v += (pi * (max(iVal[i], iVal[i + 1]) ** 2 - min(iVal[i], iVal[i + 1]) ** 2)) * delx
+    i += 1
 
-print("%s, %s" % (int1, int2))
-print(v)
+print("f(x) and g(x) intersect at (%s, %s) and (%s, %s)." % (int1, f(int1), int2, f(int2)))
+print("The area of the intersection is %s units^2." % t)
+print("The volume of the intersection revolved around the x axis is %s units^3." % v)
 
 ## exports data
 open('f.coord','w').write(str(fVal).replace("[","").replace("]",""))
