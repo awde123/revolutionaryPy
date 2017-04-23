@@ -2,8 +2,11 @@
 ## CreatePT for Computer Science Principles
 
 ## library importation
-import bpy, bmesh, os, math
+import bpy, bmesh, os
 from mathutils import Vector, kdtree
+from math import tan
+
+scn = bpy.context.scene
 
 ## determines the number with the most distance from zero
 def absMax(list):
@@ -25,7 +28,6 @@ def plotFunction(name, x, y, edge):
     me = bpy.data.meshes.new(name)
     ob = bpy.data.objects.new(name, me)
     me.update()
-    scn = bpy.context.scene
     scn.objects.link(ob)
     scn.objects.active = ob
     ob.select = True
@@ -74,7 +76,10 @@ bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 bpy.ops.object.origin_set(type='ORIGIN_CENTER_OF_MASS')
 
 ## creates and adjusts camera
-cY = max([absMax(y), absMax(x)]) / math.sin(1/3), 0.0)
-bpy.ops.object.camera_add(view_align=False, enter_editmode=False, location=(0.0, cY, 0.0), rotation=(270.0*0.01745329251,180.0*0.01745329251,0.0))
+cY = tan(1/3) / max([absMax(y), absMax(x)])
+cam = bpy.ops.object.camera_add(view_align=False, enter_editmode=False, location=(0.0, cY, 0.0), rotation=(270.0*0.01745329251,180.0*0.01745329251,0.0))
+cam.lens = 1/3 * 100
 
 ## preps scene for rendering
+## bpy.data.scenes["Scene"].render.resolution_y = 1920
+scn.render.resolution_y = 1920; scn.render.resolution_x = 1920
