@@ -64,10 +64,11 @@ xVal += [int1, int2]
 
 ## calculates volume of intersect solid
 v = 0.0
-for i in range(0, int(len(iVal) / 2 - 1)):
-    t = (abs(iVal[i] - iVal[i + 1]) + abs(iVal[i + 2] - iVal[i + 3])) / 2 * (xiVal[i + 1] - xiVal[i]) ## generates trapezoid
+i = 0
+while i <= len(iVal) / 2 - 1:
+    t = (abs(iVal[i] - iVal[i + 1]) + abs(iVal[i + 2] - iVal[i + 3])) / 2 * (xiVal[i + 2] - xiVal[i]) ## generates trapezoid
     v += pi * (t ** 2)
-    print(v)
+    i += 2
 
 print("%s, %s" % (int1, int2))
 print(v)
