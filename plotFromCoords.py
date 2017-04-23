@@ -5,6 +5,7 @@
 import bpy, bmesh, os
 from mathutils import Vector, kdtree
 from math import tan
+from time import sleep
 
 scn = bpy.context.scene
 
@@ -34,7 +35,7 @@ def plotFunction(name, x, y, edge):
     bpy.data.objects[name].location = (0, 0, 0)
 
     ## get file input
-    os.chdir("/Users/s97507/plot/revolutionaryPy/")
+    os.chdir("F:/revolutionaryPy/")
     xVal = listIn(x)
     yVal = listIn(y)
 
@@ -68,18 +69,36 @@ plotFunction("f(x)", "x", "f", True)
 plotFunction("g(x)", "x", "g", True)
 plotFunction("intersect", "xi", "i", False)
 
-y = listIn('f') + listIn('g')
-x = listIn('x')
+y = listIn('i')
+x = listIn('xi')
 
 ## exports and sets origin
 bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
 bpy.ops.object.origin_set(type='ORIGIN_CENTER_OF_MASS')
 
 ## creates and adjusts camera
-cY = tan(1/3) / max([absMax(y), absMax(x)])
+cY = max([absMax(y), absMax(x)]) / tan(1/3)
 cam = bpy.ops.object.camera_add(view_align=False, enter_editmode=False, location=(0.0, cY, 0.0), rotation=(270.0*0.01745329251,180.0*0.01745329251,0.0))
-cam.lens = 1/3 * 100
+bpy.data.cameras[0].lens = 1/3 * 100
 
 ## preps scene for rendering
-## bpy.data.scenes["Scene"].render.resolution_y = 1920
 scn.render.resolution_y = 1920; scn.render.resolution_x = 1920
+scr = bpy.context.window.screen
+v3d = [area for area in scr.areas if area.type == 'VIEW_3D'][0]
+v3d.spaces[0].pivot_point = 'CURSOR'
+scn.render.image_settings.file_format = 'PNG'
+bpy.context.scene.camera = bpy.data.objects['Camera']
+fp = scene.render.filepath
+
+## render
+for f in range(0,360):
+    scn.frame_set(f)
+    scn.render.filepath = fp + str(frame_nr)
+    bpy.ops.render.render(write_still=True)
+    ## rotating intersection
+    bpy.context.scene.objects.active = bpy.data.objects['intersect']
+    bpy.ops.object.mode_set(mode = 'EDIT')
+    bpy.ops.mesh.select_mode(type = 'FACE')
+    bpy.ops.mesh.extrude_faces_move
+    bpy.ops.transform.rotate(value=1, axis=(True, False, False))
+    bpy.ops.object.mode_set( mode = 'OBJECT' )
