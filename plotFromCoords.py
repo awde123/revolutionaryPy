@@ -89,16 +89,3 @@ v3d.spaces[0].pivot_point = 'CURSOR'
 scn.render.image_settings.file_format = 'PNG'
 bpy.context.scene.camera = bpy.data.objects['Camera']
 fp = scene.render.filepath
-
-## render
-for f in range(0,360):
-    scn.frame_set(f)
-    scn.render.filepath = fp + str(frame_nr)
-    bpy.ops.render.render(write_still=True)
-    ## rotating intersection
-    bpy.context.scene.objects.active = bpy.data.objects['intersect']
-    bpy.ops.object.mode_set(mode = 'EDIT')
-    bpy.ops.mesh.select_mode(type = 'FACE')
-    bpy.ops.mesh.extrude_faces_move
-    bpy.ops.transform.rotate(value=1, axis=(True, False, False))
-    bpy.ops.object.mode_set( mode = 'OBJECT' )
