@@ -8,17 +8,18 @@ scene = bpy.context.scene
 fp = scene.render.filepath # get existing output path
 scene.render.image_settings.file_format = 'PNG' # set output format to .png
 
+## The following section is based upon an answer on stackOverflow by user https://blender.stackexchange.com/users/1112/garrett
+## https://blender.stackexchange.com/questions/6969/rotate-object-around-cursor-with-python/6970#6970
 def get_override(area_type, region_type):
-    for area in bpy.context.screen.areas: 
-        if area.type == area_type:             
-            for region in area.regions:                 
-                if region.type == region_type:                    
-                    override = {'area': area, 'region': region} 
+    for area in bpy.context.screen.areas:
+        if area.type == area_type:
+            for region in area.regions:
+                if region.type == region_type:
+                    override = {'area': area, 'region': region}
                     return override
     #error message if the area or region wasn't found
     raise RuntimeError("Wasn't able to find", region_type," in area ", area_type,
                         "\n Make sure it's open while executing script.")
-
 override = get_override( 'VIEW_3D', 'WINDOW' )
 
 for x in range(0,360):
@@ -29,6 +30,7 @@ for x in range(0,360):
     bpy.ops.object.mode_set(mode='EDIT', toggle=False)
     bpy.ops.mesh.extrude_region_move(TRANSFORM_OT_translate={"value":(0, 0, 0)})
     bpy.ops.transform.rotate(override, value=math.pi/180, axis=(1,0,0))
+## end of basis on stackOverflow
 
 ob = bpy.data.objects['intersect']
 mesh=bmesh.from_edit_mesh(bpy.context.object.data)
