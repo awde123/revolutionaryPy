@@ -30,7 +30,7 @@ for x in range(0,360):
     bpy.ops.mesh.extrude_region_move(TRANSFORM_OT_translate={"value":(0, 0, 0)})
     bpy.ops.transform.rotate(override, value=math.pi/180, axis=(1,0,0))
 
-ob = bpy.data.objects['area']
+ob = bpy.data.objects['intersect']
 mesh=bmesh.from_edit_mesh(bpy.context.object.data)
 for v in mesh.verts:
     v.select = True
