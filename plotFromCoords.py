@@ -1,3 +1,4 @@
+## Begin file plotFromCoords.py
 ## Created by Gregory Croisdale March 2017
 ## CreatePT for Computer Science Principles
 
@@ -88,3 +89,4 @@ v3d = [area for area in scr.areas if area.type == 'VIEW_3D'][0]
 v3d.spaces[0].pivot_point = 'CURSOR'
 scn.render.image_settings.file_format = 'PNG'
 bpy.context.scene.camera = bpy.data.objects['Camera']
+## Begin file plotFromCoords.py

@@ -1,5 +1,7 @@
+## Begin file rotatePlane.py:
 ## Created by Gregory Croisdale March 2017
 ## CreatePT for Computer Science Principles
+
 import bpy, bmesh
 import math
 from time import sleep
@@ -37,5 +39,4 @@ mesh=bmesh.from_edit_mesh(bpy.context.object.data)
 for v in mesh.verts:
     v.select = True
 bpy.ops.mesh.remove_doubles()
-
-scene.render.filepath = fp
+## end of rotatePlane.py

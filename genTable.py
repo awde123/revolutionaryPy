@@ -1,3 +1,4 @@
+## Begin file genTable.py
 ## Created by Gregory Croisdale March 2017
 ## CreatePT for Computer Science Principles
 
@@ -81,3 +82,4 @@ open('g.coord','w').write(str(gVal).replace("[","").replace("]",""))
 open('x.coord','w').write(str(xVal).replace("[","").replace("]",""))
 open('i.coord','w').write(str(iVal).replace("[","").replace("]",""))
 open('xi.coord','w').write(str(xiVal).replace("[","").replace("]",""))
+## End file genTable.py
